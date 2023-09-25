@@ -35,11 +35,13 @@ public class ClienteController {
             // Compara el hash de la contraseña proporcionada con el hash almacenado
             if (BCrypt.checkpw(password, cliente.getPassword())) {
                 // La contraseña es correcta, autenticación exitosa
+                // Obtiene el ID del cliente autenticado
+                int clienteId = cliente.getIdCliente();
                 String role = cliente.getRol();
 
                 Map<String, Object> response = new HashMap<>();
                 response.put("authenticated", true);
-
+                response.put("cliente", cliente);
                 if ("cliente".equals(role)) {
                     // Redirige a la URL externa de Users.html para clientes
                     response.put("authenticated", true);
@@ -65,6 +67,25 @@ public class ClienteController {
         System.out.println("id_cliente recibido en el backend: " + cliente.getIdCliente());
         return clienteService.saveCliente(cliente);
     }
+    @PostMapping("/updateCliente")
+    public ResponseEntity<Map<String, String>> updateCliente(@RequestBody Cliente updatedCliente) {
+        try {
+            // Realiza la actualización del cliente en la base de datos
+            clienteService.updateCliente(updatedCliente);
+
+            // Devuelve una respuesta JSON con un mensaje de éxito
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "Actualización exitosa");
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            // En caso de error, devuelve una respuesta JSON con un mensaje de error
+            e.printStackTrace(); // Agrega este registro para ver si se lanza alguna excepción
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("error", "Error al actualizar el cliente");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+        }
+    }
+
     @GetMapping("/listClientes")
     public List<Cliente> listClientes() {
         return clienteService.listClientes();
