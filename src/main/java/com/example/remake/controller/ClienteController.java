@@ -50,9 +50,11 @@ public class ClienteController {
                 } else if ("admin".equals(role)) {
                     // Redirige al HTML de administradores
                     response.put("redirectUrl", "/admin.html");
-                } else {
-                    // Otros roles pueden ser manejados de manera similar
-                    response.put("redirectUrl", "/otra_pagina.html");
+                } else if ("personal".equals(role)){
+                    response.put("redirectUrl", "/Personal.html");
+                }
+                else {
+                    // Otros roles pueden ser manejados de manera similarresponse.put("redirectUrl", "/otra_pagina.html");
                 }
                 return ResponseEntity.ok(response);
             }
