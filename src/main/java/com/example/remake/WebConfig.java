@@ -16,7 +16,7 @@ public class WebConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://127.0.0.1:5500") // Permitir solicitudes desde esta URL
+                        .allowedOrigins("https://lauratamayo12.github.io") // Permitir solicitudes desde esta URL
                         .allowedMethods(
                                 HttpMethod.GET.name(),
                                 HttpMethod.PUT.name(),

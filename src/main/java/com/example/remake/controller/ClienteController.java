@@ -45,7 +45,7 @@ public class ClienteController {
                 if ("cliente".equals(role)) {
                     // Redirige a la URL externa de Users.html para clientes
                     response.put("authenticated", true);
-                    response.put("redirectUrl", "http://127.0.0.1:5500/Users.html");
+                    response.put("redirectUrl", "/Users.html");
                     return ResponseEntity.ok(response);
                 } else if ("admin".equals(role)) {
                     // Redirige al HTML de administradores
