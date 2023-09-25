@@ -49,7 +49,7 @@ public class ClienteController {
                     return ResponseEntity.ok(response);
                 } else if ("admin".equals(role)) {
                     // Redirige al HTML de administradores
-                    response.put("redirectUrl", "/admin.html");
+                    response.put("redirectUrl", "/Admin.html");
                 } else if ("personal".equals(role)){
                     response.put("redirectUrl", "/Personal.html");
                 }
